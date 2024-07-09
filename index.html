@@ -8,9 +8,18 @@
 </head>
 <body>
     <h1>Mridhul</h1>
-    <p>I'm a software developer.</p>
+    <p class="text">I'm a software developer.</p>
     <footer>
-        <p>Copyright&copy; <a href="https://github.com/codedstrings">codedstrings</a></p>
+        <p>&copy; <a href="https://github.com">GitHub</a></p>
     </footer>
+    <script>
+        const textElement = document.querySelector('.text');
+        const texts = ["I'm a software developer.", "I'm open to work."];
+        let index = 0;
+        setInterval(() => {
+            textElement.textContent = texts[index];
+            index = (index + 1) % texts.length;
+        }, 2000);
+    </script>
 </body>
 </html>
