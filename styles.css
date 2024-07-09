@@ -15,16 +15,21 @@ h1 {
 .text {
   color: #7f8c8d;
   font-size: 1.5em;
-  animation: alternateText 4s infinite;
+  border-right: 2px solid #333;
+  white-space: nowrap;
+  overflow: hidden;
 }
-@keyframes alternateText {
-  0%,
-  50% {
-    content: "I'm a software developer.";
+@keyframes typing {
+  from {
+    width: 0;
   }
-  50.01%,
-  100% {
-    content: "I'm open to work.";
+  to {
+    width: 100%;
+  }
+}
+@keyframes blink {
+  50% {
+    border-color: transparent;
   }
 }
 footer {

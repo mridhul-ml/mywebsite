@@ -8,18 +8,51 @@
 </head>
 <body>
     <h1>Mridhul</h1>
-    <p class="text">I'm a software developer.</p>
+    <p class="text" id="typewriter">I'm a software developer.</p>
     <footer>
         <p>Copyright&copy; <a href="https://github.com/codedstrings">codedstrings</a></p>
     </footer>
     <script>
-        const textElement = document.querySelector('.text');
-        const texts = ["I'm a software developer.", "I'm open to work."];
-        let index = 0;
-        setInterval(() => {
-            textElement.textContent = texts[index];
-            index = (index + 1) % texts.length;
-        }, 2000);
+const textElement = document.getElementById('typewriter');
+const texts = ["I'm a software developer.", "I'm open to work."];
+let index = 0;
+let charIndex = 0;
+let currentText = '';
+let isDeleting = false;
+
+// Adjust these values to control the typing speeds
+const typingDelay = 50;        // Delay between typing each character
+const pauseBeforeDelete = 1000; // Time to wait after fully typing before deleting
+const deletingDelay = 50;       // Delay between deleting each character
+
+function type() {
+    currentText = texts[index];
+    if (isDeleting) {
+        charIndex--;
+        textElement.textContent = currentText.substring(0, charIndex);
+    } else {
+        charIndex++;
+        textElement.textContent = currentText.substring(0, charIndex);
+    }
+
+    // Ensure there's always content in textElement
+    if (!isDeleting && charIndex === currentText.length) {
+        setTimeout(() => isDeleting = true, pauseBeforeDelete);
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        index = (index + 1) % texts.length;
+    }
+
+    // Use &nbsp; to keep the element's height consistent when no text is visible
+    if (charIndex === 0) {
+        textElement.innerHTML = '&nbsp;'; // Use innerHTML to preserve non-breaking space
+    }
+
+    setTimeout(type, isDeleting ? deletingDelay : typingDelay);
+}
+
+type();
+
     </script>
 </body>
 </html>
